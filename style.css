@@ -7,6 +7,10 @@ p {
   text-align: justify;
 }
 
+h3 {
+  text-align: center;
+}
+
 .navbar {
   background-color: #086464;
   padding: 1rem 0;
