@@ -92,6 +92,14 @@ p {
   font-size: 1.1rem;
 }
 
+#schedule-en {
+  background-color: #b0dcd4;
+}
+
+#schedule-en h2 {
+  color: white;
+}
+
 .schedule-card {
   border: none;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
