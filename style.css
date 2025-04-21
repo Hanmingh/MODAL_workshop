@@ -117,19 +117,18 @@ section.py-5 {
   padding: 3rem 0;
 }
 
-.logos-row {
-  margin-top: 1rem;
-  margin-bottom: 1rem;
+.logos-section {
+  position: relative;
 }
 
-.logo {
+.logos-section .logo {
   width: 100%;
   padding-bottom: 100%;
   overflow: hidden;
   position: relative;
 }
 
-.logo img {
+.logos-section .logo img {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -138,8 +137,41 @@ section.py-5 {
   max-height: 60%;
 }
 
+.logos-section-title {
+  font-family: 'Poppins', sans-serif;
+  color: #086464;
+  font-weight: 500;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
 footer {
   background-color: #212529;
   color: #fff;
   font-size: 0.9rem;
+}
+
+@media (min-width: 768px) {
+  .logos-section::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    width: 2px;
+    background: #086464;
+    transform: translateX(-1px);
+  }
+
+  .logos-section .col-md-6:first-child {
+    padding-right: 2rem;
+  }
+  .logos-section .col-md-6:last-child {
+    padding-left: 2rem;
+  }
 }
