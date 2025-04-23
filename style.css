@@ -36,7 +36,7 @@ h3 {
 
 .hero-section {
   position: relative;
-  height: 100vh;
+  height: 50vh;
   background: url('images/banner_background.jpg') no-repeat center center/cover;
 }
 .hero-overlay {
@@ -50,7 +50,7 @@ h3 {
   align-items: center;
   justify-content: center;
   text-align: center;
-  padding: 0 20px;
+  padding-top: 100px;
 }
 .hero-title {
   font-family: 'Poppins', sans-serif;
@@ -65,7 +65,8 @@ h3 {
   margin-bottom: 2rem;
 }
 
-.btn-primary {
+.btn-primary,
+.btn-primary:visited {
   background-color: #f37022;
   border-color: #f37022;
   color: #fff;
@@ -141,19 +142,6 @@ section.py-5 {
   max-height: 60%;
 }
 
-.logos-section-title {
-  font-family: 'Poppins', sans-serif;
-  color: #086464;
-  font-weight: 500;
-  margin-bottom: 1rem;
-  font-size: 1.25rem;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
 footer {
   background-color: #212529;
   color: #fff;
@@ -166,7 +154,7 @@ footer {
     position: absolute;
     top: 0;
     bottom: 0;
-    left: 50%;
+    left: 25%;
     width: 2px;
     background: #086464;
     transform: translateX(-1px);
@@ -177,5 +165,11 @@ footer {
   }
   .logos-section .col-md-6:last-child {
     padding-left: 2rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 100vh;
   }
 }
