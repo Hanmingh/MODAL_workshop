@@ -113,6 +113,10 @@ h3 {
   transform: translateY(-10px);
 }
 
+.card-title {
+  color: #086464;
+}
+
 section.py-5 {
   padding: 3rem 0;
 }
