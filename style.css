@@ -11,6 +11,15 @@ h3 {
   text-align: center;
 }
 
+.mail,
+.mail:visited {
+  color: #f37022;
+}
+.mail:hover,
+.mail:focus {
+  color: #e35e1f;
+}
+
 .navbar {
   background-color: #086464;
   padding: 1rem 0;
