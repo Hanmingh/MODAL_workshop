@@ -230,6 +230,7 @@ h3 {
   margin: 0 auto;
   padding: 0 1rem;
   z-index: 11;
+  overflow: visible;
 }
 
 .schedule-timetable {
@@ -248,12 +249,14 @@ h3 {
 
 .schedule-grid {
   display: grid;
-  grid-template-columns: auto repeat(10, 1fr);
+  grid-template-columns: auto repeat(10, minmax(120px, 1fr));
   gap: 1px;
   background: rgba(8, 100, 100, 0.1);
   width: 100%;
   position: relative;
   z-index: 13;
+  min-width: 1200px; /* Minimum width to prevent squeezing */
+  overflow: visible;
 }
 
 .time-header {
@@ -542,7 +545,7 @@ footer {
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 8px 24px rgba(8, 100, 100, 0.2);
-  z-index: 1001;
+  z-index: 9999;
   min-width: 250px;
   max-width: 300px;
   opacity: 0;
@@ -586,7 +589,42 @@ footer {
 .session-cell:hover .session-popover {
   opacity: 1;
   visibility: visible;
-  z-index: 1001;
+  z-index: 9999;
+}
+
+/* Special handling for last row popovers */
+.schedule-grid > :nth-last-child(-n+11) {
+  position: relative;
+}
+
+.schedule-grid > :nth-last-child(-n+11) .session-popover {
+  bottom: 100%;
+  top: auto;
+  left: 50%;
+  right: auto;
+  transform: translateX(-50%);
+  margin: 0 0 5px 0;
+}
+
+/* Handle edge cases for rightmost columns in last row */
+.schedule-grid > :nth-last-child(-n+3) .session-popover {
+  left: auto;
+  right: 0;
+  transform: none;
+}
+
+/* Ensure last row popovers are always on top */
+.schedule-grid > :nth-last-child(-n+11):hover {
+  z-index: 9998;
+}
+
+.schedule-grid > :nth-last-child(-n+11):hover .session-popover {
+  z-index: 9999;
+}
+
+/* Remove any transform on hover for last row */
+.schedule-grid > :nth-last-child(-n+11):hover {
+  transform: none;
 }
 
 /* Adjust content styles for better fit */
@@ -678,38 +716,6 @@ footer {
   }
 }
 
-/* Add JavaScript-like position adjustment for bottom rows */
-.session-cell:nth-last-child(-n+11) .session-popover {
-  bottom: auto;
-  top: auto;
-  transform: none;
-  right: 0;
-  left: 100%;
-  margin: 0 0 0 5px;
-}
-
-/* Handle edge cases for rightmost columns */
-.session-cell:nth-child(11n) .session-popover,
-.session-cell:nth-child(11n-1) .session-popover {
-  left: auto;
-  right: 100%;
-  margin: 0 5px 0 0;
-}
-
-.session-cell:hover[data-position="right"] .session-popover {
-  transform: none;
-}
-
-/* Remove permanent high z-index from last row */
-/* Only apply high z-index when last row cells are hovered */
-.schedule-grid > :nth-last-child(-n+11):hover {
-  z-index: 1003;
-}
-
-.schedule-grid > :nth-last-child(-n+11):hover .session-popover {
-  z-index: 1004;
-}
-
 #about-en {
   position: relative;
   z-index: 1;
@@ -724,6 +730,8 @@ footer {
   backdrop-filter: none;
   -webkit-backdrop-filter: none;
   border: none;
+  position: relative;
+  z-index: 5;
 }
 
 /* Accordion Styles */
@@ -805,5 +813,78 @@ footer {
   .day-theme {
     display: block;
     margin-top: 0.25rem;
+  }
+}
+
+/* Add responsive container for mobile */
+@media (max-width: 1200px) {
+  .schedule-timetable {
+    overflow-x: auto;
+    overflow-y: visible;
+    -webkit-overflow-scrolling: touch; /* Smooth scrolling on iOS */
+  }
+  
+  .schedule-container {
+    padding: 0 0.5rem;
+    overflow: visible;
+  }
+  
+  /* Show scroll indicator on mobile */
+  .schedule-timetable::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    width: 30px;
+    background: linear-gradient(to right, transparent, rgba(8, 100, 100, 0.1));
+    pointer-events: none;
+    opacity: 0.8;
+    z-index: 14;
+  }
+  
+  /* Ensure popovers stay on top on mobile */
+  .session-cell:hover .session-popover {
+    z-index: 9999;
+  }
+  
+  .schedule-grid > :nth-last-child(-n+11):hover {
+    z-index: 9998;
+  }
+  
+  .schedule-grid > :nth-last-child(-n+11):hover .session-popover {
+    z-index: 9999;
+  }
+}
+
+/* Maintain cell sizes on mobile */
+@media (max-width: 768px) {
+  .time-header {
+    min-width: 120px;
+    font-size: 0.75rem;
+    padding: 0.5rem 0.25rem;
+  }
+  
+  .day-label {
+    min-width: 90px;
+    padding: 0.5rem;
+  }
+  
+  .session-cell {
+    min-width: 120px;
+    min-height: 80px;
+  }
+  
+  /* Mobile popover adjustments */
+  .session-popover {
+    z-index: 9999;
+    min-width: 200px;
+    max-width: 250px;
+    font-size: 0.8rem;
+    padding: 0.75rem;
+  }
+  
+  .session-cell:hover .session-popover {
+    z-index: 9999;
   }
 }
