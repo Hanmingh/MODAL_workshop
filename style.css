@@ -21,26 +21,135 @@ h3 {
 }
 
 .navbar {
-  background-color: #086464;
-  padding: 1rem 0;
+  background-color: transparent;
+  padding: 1.5rem 0;
+  transition: all 0.3s ease;
+  backdrop-filter: blur(0);
+  -webkit-backdrop-filter: blur(0);
 }
+
+.navbar.scrolled {
+  background-color: rgba(8, 100, 100, 0.15) !important;
+  padding: 1rem 0;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .navbar-brand {
   font-family: 'Poppins', sans-serif;
   font-weight: 700;
   font-size: 1.5rem;
+  color: #fff;
+  transition: all 0.3s ease;
 }
+
+.navbar-brand:hover {
+  color: #f37022;
+  transform: translateY(-2px);
+}
+
 .nav-link {
   font-size: 1rem;
+  color: rgba(255, 255, 255, 0.9) !important;
+  margin: 0 0.5rem;
+  padding: 0.5rem 1rem !important;
+  border-radius: 50px;
+  transition: all 0.3s ease;
 }
+
+.nav-link:hover,
+.nav-link:focus {
+  color: #fff !important;
+  background-color: rgba(243, 112, 34, 0.15);
+  transform: translateY(-2px);
+}
+
 .navbar .btn-outline-light {
   border-color: #f37022;
   color: #f37022;
+  border-radius: 50px;
+  padding: 0.5rem 1.5rem;
+  transition: all 0.3s ease;
 }
+
 .navbar .btn-outline-light:hover,
 .navbar .btn-outline-light:focus {
   background-color: #f37022;
   color: #fff;
   border-color: #f37022;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(243, 112, 34, 0.2);
+}
+
+.navbar-toggler {
+  border: none;
+  padding: 0.5rem;
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler:focus {
+  box-shadow: none;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.navbar-toggler-icon {
+  background-image: none;
+  position: relative;
+  width: 24px;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler-icon::before,
+.navbar-toggler-icon::after {
+  content: '';
+  position: absolute;
+  width: 24px;
+  height: 2px;
+  background-color: #fff;
+  transition: all 0.3s ease;
+}
+
+.navbar-toggler-icon::before {
+  transform: translateY(-8px);
+}
+
+.navbar-toggler-icon::after {
+  transform: translateY(8px);
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon {
+  background-color: transparent;
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::before {
+  transform: rotate(45deg);
+}
+
+.navbar-toggler[aria-expanded="true"] .navbar-toggler-icon::after {
+  transform: rotate(-45deg);
+}
+
+@media (max-width: 991.98px) {
+  .navbar-collapse {
+    background-color: rgba(8, 100, 100, 0.95);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    margin: 1rem -1rem -1rem;
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+  
+  .nav-link {
+    margin: 0.25rem 0;
+  }
 }
 
 .hero-section {
@@ -106,29 +215,282 @@ h3 {
   font-size: 1.1rem;
 }
 
+/* Modern Timetable Grid Schedule */
 #schedule-en {
-  background-color: #b0dcd4;
+  background: #b0dcd4;
+  position: relative;
+  overflow: visible;
+  padding: 4rem 0;
+  z-index: 10;
 }
 
-#schedule-en h2 {
+.schedule-container {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  z-index: 11;
+}
+
+.schedule-timetable {
+  background: rgba(255, 255, 255, 0.98);
+  border-radius: 16px;
+  overflow: visible;
+  box-shadow: 0 8px 32px rgba(8, 100, 100, 0.15);
+  border: 1px solid rgba(8, 100, 100, 0.1);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  margin-top: 2rem;
+  width: 100%;
+  position: relative;
+  z-index: 12;
+}
+
+.schedule-grid {
+  display: grid;
+  grid-template-columns: auto repeat(10, 1fr);
+  gap: 1px;
+  background: rgba(8, 100, 100, 0.1);
+  width: 100%;
+  position: relative;
+  z-index: 13;
+}
+
+.time-header {
+  background: #086464;
   color: white;
+  padding: 0.5rem 0.25rem;
+  font-weight: 600;
+  font-size: 0.85rem;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  min-height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  word-break: break-word;
+  hyphens: auto;
 }
 
-.schedule-card {
-  border: none;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s;
-}
-.schedule-card:hover {
-  transform: translateY(-10px);
+.time-header.corner {
+  background: #064545;
+  font-size: 0.75rem;
+  font-weight: 500;
 }
 
-.card-title {
+.day-label {
+  background: rgba(8, 100, 100, 0.08);
+  padding: 0.75rem 0.5rem;
+  font-weight: 600;
   color: #086464;
+  border-right: 2px solid rgba(8, 100, 100, 0.1);
+  position: sticky;
+  left: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  min-width: 90px;
 }
 
-section.py-5 {
-  padding: 3rem 0;
+.day-number {
+  background: #086464;
+  color: white;
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.day-name {
+  font-size: 0.9rem;
+  font-family: 'Poppins', sans-serif;
+}
+
+.session-cell {
+  position: relative;
+  background: white;
+  padding: 0.35rem;
+  min-height: 80px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+  cursor: pointer;
+  z-index: 14;
+}
+
+.session-cell:hover {
+  background: rgba(8, 100, 100, 0.03);
+  border-color: rgba(8, 100, 100, 0.2);
+  transform: scale(1.02);
+  z-index: 1000;
+}
+
+.session-cell.empty {
+  background: rgba(8, 100, 100, 0.02);
+  cursor: default;
+}
+
+.session-cell.empty:hover {
+  transform: none;
+  box-shadow: none;
+}
+
+.session-cell.break {
+  background: rgba(8, 100, 100, 0.05);
+  border-left: 3px solid #086464;
+}
+
+.session-cell.plenary {
+  background: rgba(243, 112, 34, 0.05);
+  border-left: 3px solid #f37022;
+}
+
+.session-cell.hands-on {
+  background: rgba(8, 100, 100, 0.08);
+  border-left: 3px solid #086464;
+}
+
+.session-cell.talk {
+  background: rgba(255, 255, 255, 1);
+  border-left: 3px solid #0a7575;
+}
+
+.session-cell.special {
+  background: rgba(139, 69, 19, 0.08);
+  border-left: 3px solid #8B4513;
+}
+
+.session-cell.special .session-title {
+  color: #8B4513;
+  font-weight: 700;
+}
+
+.session-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.session-title {
+  font-weight: 600;
+  font-size: 0.8rem;
+  color: #086464;
+  margin-bottom: 0.25rem;
+  line-height: 1.2;
+  word-break: break-word;
+  hyphens: auto;
+}
+
+.session-speaker {
+  font-size: 0.7rem;
+  color: #666;
+  line-height: 1.3;
+  display: none; /* Hide speakers by default */
+}
+
+.session-cell.break .session-title {
+  color: #666;
+  font-style: italic;
+  font-weight: 500;
+}
+
+.session-cell.plenary .session-title {
+  color: #f37022;
+  font-weight: 700;
+}
+
+/* Multi-column spanning sessions */
+.session-cell.span-2 {
+  grid-column: span 2;
+}
+
+.session-cell.span-3 {
+  grid-column: span 3;
+}
+
+.session-cell.span-4 {
+  grid-column: span 4;
+  background: white;
+}
+
+.session-cell.span-4 .session-title {
+  text-align: center;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 1200px) {
+  .time-header {
+    font-size: 0.75rem;
+    padding: 0.5rem 0.15rem;
+  }
+  
+  .session-title {
+    font-size: 0.75rem;
+  }
+  
+  .session-speaker {
+    font-size: 0.65rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .schedule-grid {
+    gap: 0.5px;
+  }
+  
+  .time-header {
+    font-size: 0.65rem;
+    padding: 0.25rem 0.1rem;
+    min-height: 50px;
+  }
+  
+  .day-label {
+    padding: 0.5rem 0.25rem;
+    min-width: 70px;
+    font-size: 0.75rem;
+  }
+  
+  .session-cell {
+    padding: 0.25rem;
+    min-height: 60px;
+  }
+  
+  .session-title {
+    font-size: 0.7rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .schedule-container {
+    padding: 0 0.5rem;
+  }
+  
+  .time-header {
+    font-size: 0.6rem;
+  }
+  
+  .day-label {
+    min-width: 60px;
+    font-size: 0.7rem;
+  }
+  
+  .session-title {
+    font-size: 0.65rem;
+  }
+  
+  .session-cell {
+    padding: 0.2rem;
+    min-height: 50px;
+  }
 }
 
 .logos-section {
@@ -169,5 +531,279 @@ footer {
 @media (max-width: 768px) {
   .hero-section {
     height: 100vh;
+  }
+}
+
+/* Popover Styles */
+.session-popover {
+  position: absolute;
+  background: white;
+  border: 1px solid rgba(8, 100, 100, 0.2);
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 8px 24px rgba(8, 100, 100, 0.2);
+  z-index: 1001;
+  min-width: 250px;
+  max-width: 300px;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.2s ease;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+/* Adjust popover positioning */
+.session-cell[data-position="top"] .session-popover {
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 5px;
+}
+
+.session-cell[data-position="bottom"] .session-popover {
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-top: 5px;
+}
+
+.session-cell[data-position="left"] .session-popover {
+  right: 100%;
+  top: 0;
+  transform: translateY(0);
+  margin-right: 5px;
+}
+
+.session-cell[data-position="right"] .session-popover {
+  left: calc(100% + 5px);
+  top: 0;
+  transform: none;
+}
+
+/* Add hover states */
+.session-cell:hover .session-popover {
+  opacity: 1;
+  visibility: visible;
+  z-index: 1001;
+}
+
+/* Adjust content styles for better fit */
+.popover-title {
+  font-weight: 700;
+  color: #086464;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid #f37022;
+}
+
+.popover-time {
+  background: #f37022;
+  color: white;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  display: inline-block;
+  margin-bottom: 0.5rem;
+}
+
+.popover-speakers {
+  color: #555;
+  font-size: 0.8rem;
+}
+
+.popover-speakers ul {
+  margin: 0.5rem 0 0 0;
+  padding-left: 1rem;
+  list-style-type: disc;
+}
+
+.popover-speakers li {
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.popover-description {
+  color: #666;
+  font-style: italic;
+  margin-top: 0.4rem;
+  font-size: 0.8rem;
+}
+
+/* Enhanced popover styles for longer content */
+.popover-description p {
+  margin-bottom: 0.5rem;
+}
+
+.popover-description ul {
+  margin: 0.5rem 0;
+  padding-left: 1.2rem;
+  list-style-type: disc;
+}
+
+.popover-description li {
+  margin-bottom: 0.3rem;
+  font-size: 0.8rem;
+  color: #555;
+}
+
+/* Add media queries for responsive popovers */
+@media (max-width: 768px) {
+  .session-popover {
+    min-width: 200px;
+    max-width: 250px;
+    font-size: 0.8rem;
+    padding: 0.75rem;
+  }
+  
+  .popover-title {
+    font-size: 0.85rem;
+    margin-bottom: 0.4rem;
+  }
+  
+  .popover-time {
+    font-size: 0.7rem;
+    padding: 0.2rem 0.4rem;
+  }
+  
+  .popover-speakers {
+    font-size: 0.75rem;
+  }
+  
+  .popover-description {
+    font-size: 0.75rem;
+  }
+}
+
+/* Add JavaScript-like position adjustment for bottom rows */
+.session-cell:nth-last-child(-n+11) .session-popover {
+  bottom: auto;
+  top: auto;
+  transform: none;
+  right: 0;
+  left: 100%;
+  margin: 0 0 0 5px;
+}
+
+/* Handle edge cases for rightmost columns */
+.session-cell:nth-child(11n) .session-popover,
+.session-cell:nth-child(11n-1) .session-popover {
+  left: auto;
+  right: 100%;
+  margin: 0 5px 0 0;
+}
+
+.session-cell:hover[data-position="right"] .session-popover {
+  transform: none;
+}
+
+/* Remove permanent high z-index from last row */
+/* Only apply high z-index when last row cells are hovered */
+.schedule-grid > :nth-last-child(-n+11):hover {
+  z-index: 1003;
+}
+
+.schedule-grid > :nth-last-child(-n+11):hover .session-popover {
+  z-index: 1004;
+}
+
+#about-en {
+  position: relative;
+  z-index: 1;
+}
+
+/* Schedule Summary Styles */
+.schedule-summary {
+  background: transparent;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: none;
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  border: none;
+}
+
+/* Accordion Styles */
+.accordion {
+  --bs-accordion-border-color: rgba(8, 100, 100, 0.2);
+  --bs-accordion-border-radius: 8px;
+}
+
+.accordion-item {
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(8, 100, 100, 0.15) !important;
+  margin-bottom: 0.5rem;
+  border-radius: 8px !important;
+  overflow: hidden;
+}
+
+.accordion-item:last-child {
+  margin-bottom: 0;
+}
+
+.accordion-button {
+  background: rgba(8, 100, 100, 0.05) !important;
+  color: #086464 !important;
+  font-weight: 600 !important;
+  border: none !important;
+  box-shadow: none !important;
+  padding: 1rem 1.25rem;
+  transition: all 0.3s ease;
+}
+
+.accordion-button:not(.collapsed) {
+  background: rgba(8, 100, 100, 0.1) !important;
+  color: #086464 !important;
+  box-shadow: none !important;
+}
+
+.accordion-button:hover {
+  background: rgba(8, 100, 100, 0.08) !important;
+}
+
+.accordion-button:focus {
+  box-shadow: 0 0 0 0.25rem rgba(8, 100, 100, 0.25) !important;
+}
+
+.accordion-button::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16' fill='%23086464'%3e%3cpath fill-rule='evenodd' d='M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z'/%3e%3c/svg%3e") !important;
+}
+
+.day-theme {
+  color: #f37022;
+  font-weight: 500;
+}
+
+.accordion-body {
+  background: white;
+  color: #555;
+  line-height: 1.6;
+  text-align: justify;
+  padding: 1.25rem;
+  border-top: 1px solid rgba(8, 100, 100, 0.1);
+}
+
+@media (max-width: 768px) {
+  .schedule-summary {
+    padding: 1rem;
+    margin: 0 0.5rem;
+  }
+  
+  .accordion-button {
+    padding: 0.75rem 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .accordion-body {
+    padding: 1rem;
+    font-size: 0.9rem;
+  }
+  
+  .day-theme {
+    display: block;
+    margin-top: 0.25rem;
   }
 }
