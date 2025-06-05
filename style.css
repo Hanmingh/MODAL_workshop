@@ -50,7 +50,7 @@ h3 {
   transform: translateY(-2px);
 }
 
-.nav-link {
+.navbar .nav-link {
   font-size: 1rem;
   color: rgba(255, 255, 255, 0.9) !important;
   margin: 0 0.5rem;
@@ -59,8 +59,8 @@ h3 {
   transition: all 0.3s ease;
 }
 
-.nav-link:hover,
-.nav-link:focus {
+.navbar .nav-link:hover,
+.navbar .nav-link:focus {
   color: #fff !important;
   background-color: rgba(243, 112, 34, 0.15);
   transform: translateY(-2px);
@@ -147,7 +147,7 @@ h3 {
     border-radius: 1rem;
   }
   
-  .nav-link {
+  .navbar .nav-link {
     margin: 0.25rem 0;
   }
 }
